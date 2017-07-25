@@ -1,0 +1,8 @@
+/* CSS declarations go here */
+.togglable-row:not(.visible-row) {
+  display: none;
+}
+
+.current-network {
+  float: right;
+}

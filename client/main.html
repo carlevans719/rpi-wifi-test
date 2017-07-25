@@ -1,0 +1,44 @@
+<head>
+  <title>rpi-test</title>
+</head>
+
+<body>
+  {{> networks}}
+</body>
+
+<template name="networks">
+
+  <h3 class="current-network">{{currentNetwork}}</h3>
+
+  <h3>available networks:</h3>
+  <table>
+    <tr>
+      <th>SSID</th>
+      <th>Strength (%)</th>
+      <th>Protected?</th>
+      <th></th>
+    </tr>
+    {{#each network in networks}}
+      {{> networkRow network=network collapseRows=collapseRows}}
+    {{/each}}
+  </table>
+</template>
+
+<template name="networkRow">
+  <tr class="js-network-row">
+    <td class="js-ssid-cell">{{network.ssid}}</td>
+    <td class="js-strength-cell">{{getPercentage network.signalLevel}}%</td>
+    <td class="js-protected-cell">{{isProtected network.flags}}</td>
+    <td><buttton type="button" class="js-toggle-button">&gt;</buttton></td>
+  </tr>
+
+  {{#if isProtected network.flags}}
+    <tr class="togglable-row">
+      <td colspan="4">
+        <span>Password: </span>
+        <input type="password" name="password" value="">
+        <button type="button" class="js-connect-button">connect</button>
+      </td>
+    </tr>
+  {{/if}}
+</template>
